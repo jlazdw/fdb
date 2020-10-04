@@ -40,6 +40,13 @@ public interface FoundationDBConfigOptions {
         ConfigOption.Type.LOCAL,
         "janusgraph");
 
+    ConfigOption<String> KEYSPACE = new ConfigOption<>(
+            FDB_NS,
+            "keyspace",
+            "The base path of the JanusGraph directory in FoundationDB.  It will be created if it does not exist.",
+            ConfigOption.Type.LOCAL,
+            "janusgraph");
+
     ConfigOption<Integer> VERSION = new ConfigOption<>(
         FDB_NS,
         "version",
@@ -61,5 +68,80 @@ public interface FoundationDBConfigOptions {
         ConfigOption.Type.LOCAL,
         "serializable");
 
+
+    // stevwest: Add support for TLS related configuration settings
+    ConfigOption<String> TLS_CERTIFICATE_FILE_PATH = new ConfigOption<>(
+            FDB_NS,
+            "tls-certificate-file-path",
+            "Path to the file containing the TLS certificate for FoundationDB to use.",
+            ConfigOption.Type.LOCAL,
+            "");
+
+    ConfigOption<String> TLS_KEY_FILE_PATH = new ConfigOption<>(
+            FDB_NS,
+            "tls-key-file-path",
+            "Path to the file containing the private key corresponding to the TLS certificate for FoundationDB to use.",
+            ConfigOption.Type.LOCAL,
+            "");
+
+    ConfigOption<String> TLS_CA_FILE_PATH = new ConfigOption<>(
+            FDB_NS,
+            "tls-ca-file-path",
+            "Path to the file containing the CA certificates chain for FoundationDB to use.",
+            ConfigOption.Type.LOCAL,
+            "");
+
+    ConfigOption<String> TLS_VERIFY_PEERS = new ConfigOption<>(
+            FDB_NS,
+            "tls-verify-peers",
+            "The constraints for FoundationDB to validate TLS peers against.",
+            ConfigOption.Type.LOCAL,
+            "");
+
+    ConfigOption<Integer> FDB_READ_VERSION_FETCH_TIME = new ConfigOption<>(
+            FDB_NS,
+            "fdb-read-version-fetch-time",
+            "The interval of fetching FDB read version.",
+            ConfigOption.Type.LOCAL,
+            250);
+
+    ConfigOption<Boolean> ENABLE_FDB_READ_VERSION_PREFETCH = new ConfigOption<>(
+            FDB_NS,
+            "enable-fdb-read-version-prefetch",
+            "Whether to prefetch the FDB version or not. Enabling it is to favor performance over consistency.",
+            ConfigOption.Type.LOCAL,
+            false);
+
+    ConfigOption<Boolean> ENABLE_CAUSAL_READ_RISKY = new ConfigOption<>(
+            FDB_NS,
+            "enable-causal-read-risky",
+            "Enable FDB transaction causal read risky.",
+            ConfigOption.Type.LOCAL,
+            false
+    );
+
+    ConfigOption<Boolean> ENABLE_TRANSACTION_TRACE = new ConfigOption<>(
+            FDB_NS,
+            "enable-transaction-trace",
+            "Enable FDB transaction trace.",
+            ConfigOption.Type.LOCAL,
+            false
+    );
+
+    ConfigOption<String> TRANSACTION_TRACE_PATH = new ConfigOption<>(
+            FDB_NS,
+            "transaction-trace-path",
+            "FDB transaction trace path (a folder, not a file)",
+            ConfigOption.Type.LOCAL,
+            "/tmp/"
+    );
+
+    ConfigOption<String> GET_RANGE_MODE = new ConfigOption<>(
+            FDB_NS,
+            "get-range-mode",
+            "The mod of executing FDB getRange, either `iterator` or `list`",
+            ConfigOption.Type.LOCAL,
+            "list"
+    );
 
 }
