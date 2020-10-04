@@ -349,12 +349,8 @@ public class FoundationDBKeyValueStore implements OrderedKeyValueStore {
                     break;
                 } catch (RuntimeException e) {
 
-                    log.info("Existing async iterator gets canceled.");
+                    log.info("current async iterator canceled and current transaction could be re-started when conditions meet.");
                     entries.cancel();
-
-                    if (log.isErrorEnabled()) {
-                        log.error("AsyncIterator fetchNext() throws exception", e);
-                    }
 
                     Throwable t = e.getCause();
                     FDBException fdbException = unwrapException(t);
